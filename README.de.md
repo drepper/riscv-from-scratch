@@ -7,7 +7,7 @@ Startpunkt.  Die vorhandene Funktionalität implementiert das Kompilieren von Te
 Speicher und Übergabe der Kontrolle an einen vom Benutzer bereitgestellten Speicher**real**Simulator.
 
 Die Aufgabe besteht darin, in der Klasse eine funktionale Simulation zu schreiben`MySimulator`im`myriscv.py`Datei.  Eine Simulation
-Objekt basierend auf der Klasse wird erstellt und das`run()`Methode wird aufgerufen.`step()`ist erhältlich als
+Es wird ein auf der Klasse basierendes Objekt erstellt und das`run()`Methode wird aufgerufen.`step()`ist erhältlich als
 Alternative zum Single-Stepping, diese Methode wird hier jedoch nicht verwendet.
 
 Die Simulation betrifft nur den Userspace-Teil der RISC-V ISA.  Das heißt, sobald das Programm das verwendet`ecall`Anweisung kann die Simulation gestoppt werden.  Dies ist das erwartete Verhalten für die Programme in[Testsuite](https://github.com/riscv/riscv-tests.git).
@@ -37,10 +37,10 @@ sudo dnf install gcc-c++-riscv64-linux-gnu
 Der gesamte zusätzliche Code geht in die`myriscv.py`Datei.  Der vorhandene Code ist nur ein Ausgangspunkt.  Natürlich
 Darf jeder den neuen Code in mehrere neue Dateien aufteilen?  Stellen Sie einfach sicher, dass alles korrekt geladen wird.
 
-Der`CPUState` class has three methods that need to be implemented for the testing framework to assess the result
-of the simulation:
+Der`CPUState`Die Klasse verfügt über drei Methoden, die implementiert werden müssen, damit das Testframework das Ergebnis bewerten kann
+der Simulation:
 
--   `get_register(reg)`: Gibt den Wert eines Registers mit dem Namen zurück`reg`.  Beachten Sie, dass RISC-V-Ganzzahlregister mehrere haben
+-   `get_register(reg)`: Return the value of a register named `reg`.  Beachten Sie, dass RISC-V-Ganzzahlregister mehrere haben
     Namen.  Alle sollten unterstützt werden, aber das Framework verwendet`a0`,`a7`, Und`gp`.
 -   `is_ecall()`: Gibt zurück, ob die letzte ausgeführte Anweisung eine war`ecall`.  Simulation eines`ecall`Anweisung
     sollte die Simulation stoppen und die Implementierung sollte zu diesem Zeitpunkt feststellen können, ob`ecall`War
@@ -51,22 +51,22 @@ of the simulation:
 ## Verwendung
 
 Die RISC-V ISA-Testsuite deckt alle grundlegenden Anweisungen auf ziemlich gründliche Weise ab.  Die Tests sind weiter
-gruppiert nach der Erweiterung der ISA, die sie eingeführt hat.  Die Grundtests finden Sie im`i`Erweiterung und sie
+gruppiert nach der Erweiterung der ISA, die sie eingeführt hat.  Die Grundtests sind in der`i`Erweiterung und sie
 sollten zunächst implementiert und getestet werden.
 
-| Name | Beschreibung |
-  \+:----:|:----------- |
-  \|`i`| Grundlegende Anweisungen |
-  \|`m`| Multiplikation und Division |
-  \|`a`| Atomanweisungen |
-  \|`f`| Gleitkomma mit einfacher Genauigkeit |
-  \|`d`| Gleitkomma mit doppelter Genauigkeit |
-  \|`c`| Komprimierte Anleitung |
-  \|`zba`| Anweisungen zur Adressgenerierung |
-  \|`zbb`| Grundlegende Anweisungen zur Bitmanipulation |
-  \|`zbc`| Anleitung zur Carryless-Multiplikation |
-  \|`zbs`| Einzelbit-Anweisungen |
-  \|`zfh`| Gleitkommaanweisungen mit halber Genauigkeit |
+|  Name | Beschreibung                                 |
+| :---: | :------------------------------------------- |
+|  `i`  | Grundlegende Anweisungen                     |
+|  `m`  | Multiplikation und Division                  |
+|  `a`  | Atomanweisungen                              |
+|  `f`  | Gleitkomma mit einfacher Genauigkeit         |
+|  `d`  | Gleitkomma mit doppelter Genauigkeit         |
+|  `c`  | Komprimierte Anleitung                       |
+| `zba` | Anweisungen zur Adressgenerierung            |
+| `zbb` | Grundlegende Anweisungen zur Bitmanipulation |
+| `zbc` | Anleitung zur Carryless-Multiplikation       |
+| `zbs` | Einzelbit-Anweisungen                        |
+| `zfh` | Gleitkommaanweisungen mit halber Genauigkeit |
 
 Alle außer dem`i`Die Erweiterung ist optional.  Zusätzliche Anweisungen sollten möglicherweise in der Reihenfolge ausgeführt werden, in der sie ausgeführt werden
 erscheinen in der Tabelle, dies ist jedoch nicht unbedingt erforderlich.  Es gibt einige Abhängigkeiten zwischen Erweiterungen (z. B.`d`Und`zfh`hängen davon ab`f`Erweiterung), aber ansonsten sollte sich jeder frei fühlen, das Problem so anzugehen, wie er möchte.
@@ -97,13 +97,13 @@ Band 2 kann vorerst ignoriert werden.
 Nach der Lektüre von Kapitel 1 ist es, wie oben erläutert, am besten, mit der Implementierung und dem Testen zu beginnen`i`Verlängerung
 wird in Kapitel 2 erklärt. Die 64-Bit-Variante wird in Kapitel 7 erklärt. Es könnte sinnvoll sein, das zu implementieren`i`Zuerst die Erweiterung für beide Größen, bevor Sie mit den anderen Erweiterungen fortfahren.  Der Grund dafür ist, dass dies eine ergibt
 Gelegenheit zu lernen, wie man die Implementierung für diese Breite vereinheitlicht.  Den Code einlesen`pysim_riscv.py`Du
-kann sehen, dass die`Simulation`Das Objekt hat einen Member namens`xlen` which is the common name used throughout the ISA
-manual to differentiate between 32-bit and 64-bit variants.  Use this member variable instead of any hardcoded
-values in your code.
+kann sehen, dass die`Simulation`Das Objekt hat einen Member namens`xlen`Dies ist der in der gesamten ISA gebräuchliche Name
+Handbuch zur Unterscheidung zwischen 32-Bit- und 64-Bit-Varianten.  Verwenden Sie diese Mitgliedsvariable anstelle einer fest codierten Variable
+Werte in Ihrem Code.
 
 Der`c`Die Erweiterung eröffnet eine neue Dimension.  Es ermöglicht das Komprimieren (daher`c`Erweiterung) der Binärcode von
 Kodierung häufig verwendeter Anweisungen mit nur 16 Bit.  Dies führt zu einer Komplexität der Anweisungen
-Die Ausrichtung auf 32-Bit-Adressen ist nicht mehr garantiert.  In diesem reinen Python ist das kein großes Problem
+Die Ausrichtung auf 32-Bit-Adressen ist nicht mehr gewährleistet.  In diesem reinen Python ist das kein großes Problem
 Implementierung, aber eine effiziente Implementierung unter Verwendung einer Hardwarebeschreibungssprache ist kompliziert
 wie Verilog oder VHDL (oder sogar höhere Sprachen wie Chisel oder NMigen).
 
