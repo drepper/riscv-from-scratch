@@ -64,19 +64,19 @@ The RISC-V ISA test suite cover all the basic instructions is a pretty thorough 
 grouped by the extension of the ISA which introduced them.  The basic tests are in the `i` extension and they
 should be implemented and tested first.
 
-  | Name | Description |
-  +:----:|:----------- |
-  | `i`  | Basic instructions |
-  | `m`  | Multiplication and division |
-  | `a`  | Atomic instructions |
-  | `f`  | Single precision floating point |
-  | `d`  | Double precision floating point |
-  | `c`  | Compressed instructions |
-  | `zba` | Address generation instructions |
-  | `zbb` | Basic bit manipulation instructions |
-  | `zbc` | Carryless multiplication instructions |
-  | `zbs` | Single-bit instructions |
-  | `zfh` | Half-precision floating point instructions |
+| Name | Description |
+|:----:|:----------- |
+| `i`  | Basic instructions |
+| `m`  | Multiplication and division |
+| `a`  | Atomic instructions |
+| `f`  | Single precision floating point |
+| `d`  | Double precision floating point |
+| `c`  | Compressed instructions |
+| `zba` | Address generation instructions |
+| `zbb` | Basic bit manipulation instructions |
+| `zbc` | Carryless multiplication instructions |
+| `zbs` | Single-bit instructions |
+| `zfh` | Half-precision floating point instructions |
 
 All but the `i` extension is optional.  Additional instructions should perhaps be executed in the order in which they
 appear in the table but this is no hard require.  There are some dependencies between extensions (e.g., `d` and `zfh`
