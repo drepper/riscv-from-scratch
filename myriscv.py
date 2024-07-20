@@ -10,7 +10,7 @@ class CPUState:
   """This class contains the state for the simulation."""
 
   def __init__(self, entry: int, stackaddr: int):
-    pass
+    self.ip = entry
 
   def is_ecall(self) -> bool:
     """Return true if the last executed instruction was an ECALL."""
@@ -21,6 +21,8 @@ class CPUState:
     """Return the value in the current state of the register named by REG.  The function can
     return None if a non-existing register name is provided."""
     # TBD
+    if reg == 'ip':
+      return self.ip
     return None
 
   def __str__(self) -> str:

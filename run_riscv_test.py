@@ -52,15 +52,17 @@ def main():
 
   state = Simulator(execfname).run()
 
-  exitcode = 0
+
   success, testnr = check_success(state)
   if not success:
-    print(f'Test {testnr} failed!')
-    exitcode = 1
+    print(f'\nTest {testnr} failed!  The executable is \x1b[48;5;220m\x1b[2m {os.path.realpath(execfname)} \x1b[0m')
+    ip = state.read_register('ip')
+    subprocess.run(f"riscv64-linux-gnu-objdump -d {execfname} | grep --color -C 5 -E '^[[:space:]]*{ip:x}:[[:space:]].*'", shell=True, check=False)
+    sys.exit(1)
 
   os.unlink(execfname)
 
-  sys.exit(exitcode)
+  sys.exit(0)
 
 
 if __name__ == '__main__':
