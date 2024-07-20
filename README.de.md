@@ -7,8 +7,8 @@ Startpunkt.  Die vorhandene Funktionalität implementiert das Kompilieren von Te
 Speicher und Übergabe der Kontrolle an einen vom Benutzer bereitgestellten Speicher**real**Simulator.
 
 Die Aufgabe besteht darin, in der Klasse eine funktionale Simulation zu schreiben`MySimulator`im`myriscv.py`Datei.  Eine Simulation
-Objekt basierend auf der Klasse wird erstellt und das`run()`Methode wird aufgerufen.`step()` is available as an
-alternative for single-stepping but this method is not used here.
+Es wird ein auf der Klasse basierendes Objekt erstellt und das`run()`Methode wird aufgerufen.`step()`ist erhältlich als
+Alternative zum Single-Stepping, diese Methode wird hier jedoch nicht verwendet.
 
 Die Simulation betrifft nur den Userspace-Teil der RISC-V ISA.  Das heißt, sobald das Programm das verwendet`ecall`Anweisung kann die Simulation gestoppt werden.  Dies ist das erwartete Verhalten für die Programme in[Testsuite](https://github.com/riscv/riscv-tests.git).
 
@@ -22,7 +22,7 @@ Taste.  Dann lokal in einer Shell in einem Verzeichnis ausführen, das für den 
 git clone --recurse-submodules https://github.com/<your-username>/riscv-from-scratch.git
 ```
 
-Here `<your-username>`ist Ihr GitHub-Benutzername.  Dadurch wird eine lokale Kopie des Repositorys erstellt und auch alles abgerufen
+Hier`<your-username>`ist Ihr GitHub-Benutzername.  Dadurch wird eine lokale Kopie des Repositorys erstellt und auch alles abgerufen
 Submodule.
 
 Außerdem muss die RISC-V-Toolchain auf unserem System installiert sein.  Der folgende Befehl sollte das tun
@@ -51,7 +51,7 @@ der Simulation:
 ## Verwendung
 
 Die RISC-V ISA-Testsuite deckt alle grundlegenden Anweisungen auf ziemlich gründliche Weise ab.  Die Tests sind weiter
-gruppiert nach der Erweiterung der ISA, die sie eingeführt hat.  Die Grundtests finden Sie im`i`Erweiterung und sie
+gruppiert nach der Erweiterung der ISA, die sie eingeführt hat.  Die Grundtests sind in der`i`Erweiterung und sie
 sollten zunächst implementiert und getestet werden.
 
 |  Name | Beschreibung                                 |
@@ -119,8 +119,8 @@ Zusätzlich kann der Stil mit überprüft werden
 pylint --rcfile pylint.conf run_riscv_test.py
 ```
 
-and similarly for the other Python files.  The selected style is biased and everyone should feel free to
-adjust it as wanted.
+und ähnlich für die anderen Python-Dateien.  Der ausgewählte Stil ist voreingenommen und jeder sollte sich dazu frei fühlen
+Passen Sie es wie gewünscht an.
 
 ## Was kommt als nächstes?
 
@@ -134,6 +134,6 @@ Dies ermöglicht es dann, den gesamten Schritt von höheren Programmiersprachen 
 CPU beim Ausführen der Anweisungen.  Dies kann dann dazu führen, dass über Optimierungen nachgedacht und diese umgesetzt werden
 sowohl den generierten Code als auch die CPU-Implementierung selbst.
 
-## Im Falle von Fehlern
+## In Case Of Bugs
 
 Dateifehler/Probleme auf[GitHub](https://github.com/drepper/riscv-from-scrath/issues).
