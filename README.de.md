@@ -7,8 +7,8 @@ Startpunkt.  Die vorhandene Funktionalität implementiert das Kompilieren von Te
 Speicher und Übergabe der Kontrolle an einen vom Benutzer bereitgestellten Speicher**real**Simulator.
 
 Die Aufgabe besteht darin, in der Klasse eine funktionale Simulation zu schreiben`MySimulator`im`myriscv.py`Datei.  Eine Simulation
-Es wird ein auf der Klasse basierendes Objekt erstellt und das`run()`Methode wird aufgerufen.`step()`ist erhältlich als
-Alternative zum Single-Stepping, diese Methode wird hier jedoch nicht verwendet.
+Objekt basierend auf der Klasse wird erstellt und das`run()`Methode wird aufgerufen.`step()` is available as an
+alternative for single-stepping but this method is not used here.
 
 Die Simulation betrifft nur den Userspace-Teil der RISC-V ISA.  Das heißt, sobald das Programm das verwendet`ecall`Anweisung kann die Simulation gestoppt werden.  Dies ist das erwartete Verhalten für die Programme in[Testsuite](https://github.com/riscv/riscv-tests.git).
 
@@ -22,7 +22,7 @@ Taste.  Dann lokal in einer Shell in einem Verzeichnis ausführen, das für den 
 git clone --recurse-submodules https://github.com/<your-username>/riscv-from-scratch.git
 ```
 
-Hier`<your-username>`ist Ihr GitHub-Benutzername.  Dadurch wird eine lokale Kopie des Repositorys erstellt und auch alles abgerufen
+Here `<your-username>`ist Ihr GitHub-Benutzername.  Dadurch wird eine lokale Kopie des Repositorys erstellt und auch alles abgerufen
 Submodule.
 
 Außerdem muss die RISC-V-Toolchain auf unserem System installiert sein.  Der folgende Befehl sollte das tun
@@ -40,7 +40,7 @@ Darf jeder den neuen Code in mehrere neue Dateien aufteilen?  Stellen Sie einfac
 Der`CPUState`Die Klasse verfügt über drei Methoden, die implementiert werden müssen, damit das Testframework das Ergebnis bewerten kann
 der Simulation:
 
--   `get_register(reg)`: Return the value of a register named `reg`.  Beachten Sie, dass RISC-V-Ganzzahlregister mehrere haben
+-   `get_register(reg)`: Gibt den Wert eines Registers mit dem Namen zurück`reg`.  Beachten Sie, dass RISC-V-Ganzzahlregister mehrere haben
     Namen.  Alle sollten unterstützt werden, aber das Framework verwendet`a0`,`a7`, Und`gp`.
 -   `is_ecall()`: Gibt zurück, ob die letzte ausgeführte Anweisung eine war`ecall`.  Simulation eines`ecall`Anweisung
     sollte die Simulation stoppen und die Implementierung sollte zu diesem Zeitpunkt feststellen können, ob`ecall`War
@@ -51,7 +51,7 @@ der Simulation:
 ## Verwendung
 
 Die RISC-V ISA-Testsuite deckt alle grundlegenden Anweisungen auf ziemlich gründliche Weise ab.  Die Tests sind weiter
-gruppiert nach der Erweiterung der ISA, die sie eingeführt hat.  Die Grundtests sind in der`i`Erweiterung und sie
+gruppiert nach der Erweiterung der ISA, die sie eingeführt hat.  Die Grundtests finden Sie im`i`Erweiterung und sie
 sollten zunächst implementiert und getestet werden.
 
 |  Name | Beschreibung                                 |
@@ -103,7 +103,7 @@ Werte in Ihrem Code.
 
 Der`c`Die Erweiterung eröffnet eine neue Dimension.  Es ermöglicht das Komprimieren (daher`c`Erweiterung) der Binärcode von
 Kodierung häufig verwendeter Anweisungen mit nur 16 Bit.  Dies führt zu einer Komplexität der Anweisungen
-Die Ausrichtung auf 32-Bit-Adressen ist nicht mehr gewährleistet.  In diesem reinen Python ist das kein großes Problem
+Die Ausrichtung auf 32-Bit-Adressen ist nicht mehr garantiert.  In diesem reinen Python ist das kein großes Problem
 Implementierung, aber eine effiziente Implementierung unter Verwendung einer Hardwarebeschreibungssprache ist kompliziert
 wie Verilog oder VHDL (oder sogar höhere Sprachen wie Chisel oder NMigen).
 
@@ -119,8 +119,8 @@ Zusätzlich kann der Stil mit überprüft werden
 pylint --rcfile pylint.conf run_riscv_test.py
 ```
 
-und ähnlich für die anderen Python-Dateien.  Der ausgewählte Stil ist voreingenommen und jeder sollte sich dazu frei fühlen
-Passen Sie es wie gewünscht an.
+and similarly for the other Python files.  The selected style is biased and everyone should feel free to
+adjust it as wanted.
 
 ## Was kommt als nächstes?
 
