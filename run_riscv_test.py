@@ -38,7 +38,15 @@ def main():
     print(f'Error: {srcfname} does not exist')
     sys.exit(1)
 
-  execfname = os.path.splitext(os.path.basename(srcfname))[0]
+  execdir = 'test-binaries'
+  if not os.path.exists(execdir) or not os.path.isdir(execdir):
+    try:
+      os.mkdir(execdir)
+    except FileExistsError:
+      print(f'Error: could not create directory \x1b[33m{execdir}\x1b[0m for the test binaries')
+      sys.exit(1)
+
+  execfname = os.path.join(execdir, os.path.splitext(os.path.basename(srcfname))[0])
 
   xlen_args = {
     32: ['-march=rv32g', '-mabi=ilp32'],
