@@ -25,7 +25,7 @@ Go to the project [repository's page](https://github.com/drepper/riscv-from-scra
 button.  Then run locally in a shell in a directory meant for source code:
 
 ```bash
-git clone --recurse-submodules https://github.com/<your-username>/riscv-from-scratch.git
+git clone --recurse-submodules git@github.com:<your-username>/riscv-from-scratch.git
 ```
 
 Here `<your-username>` is your GitHub username.  This will create a local copy of the repository and also fetch all
