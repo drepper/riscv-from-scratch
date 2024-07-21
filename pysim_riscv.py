@@ -24,27 +24,29 @@ class Memory:
     assert size <= self.pagesize
     page1 = offset // self.pagesize
     page2 = (offset + size - 1) // self.pagesize
+    pageoffset = offset % self.pagesize
 
     # Note that loads to unallocated memory pages will raise an exception.  That is wanted.
     if page1 == page2:
-      return self.data[page1][offset:offset + size]
-    return self.data[page1][offset:] + self.data[page2][:size - (self.pagesize - offset % self.pagesize)]
+      return self.data[page1][pageoffset:pageoffset + size]
+    return self.data[page1][pageoffset:] + self.data[page2][:size - (self.pagesize - pageoffset)]
 
   def store(self, offset: int, data: bytes) -> None:
     """Store the bytes in DATA in memory starting at OFFSET."""
     assert len(data) <= self.pagesize
     page1 = offset // self.pagesize
     page2 = (offset + len(data) - 1) // self.pagesize
+    pageoffset = offset % self.pagesize
     size = len(data)
     if page1 not in self.data:
       self.data[page1] = b'\0' * self.pagesize
     if page1 == page2:
-      self.data[page1] = self.data[page1][:offset] + data + self.data[page1][offset + len(data):]
+      self.data[page1] = self.data[page1][:pageoffset] + data + self.data[page1][offset + len(data):]
     else:
-      self.data[page1] = self.data[page1][:offset] + data[:self.pagesize - offset % self.pagesize]
+      self.data[page1] = self.data[page1][:pageoffset] + data[:self.pagesize - pageoffset]
       if page2 not in self.data:
         self.data[page2] = b'\0' * self.pagesize
-      self.data[page2] = data[-size - (self.pagesize - offset % self.pagesize):] + self.data[page2][len(data) - size:]
+      self.data[page2] = data[self.pagesize - pageoffset:] + self.data[page2][size - (self.pagesize - pageoffset):]
 
 
 class Simulator(MySimulator):
