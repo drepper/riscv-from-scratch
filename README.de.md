@@ -7,7 +7,7 @@ Startpunkt.  Die vorhandene Funktionalität implementiert das Kompilieren von Te
 Speicher und Übergabe der Kontrolle an einen vom Benutzer bereitgestellten Speicher**real**Simulator.
 
 Die Aufgabe besteht darin, in der Klasse eine funktionale Simulation zu schreiben`MySimulator`im`myriscv.py`Datei.  Eine Simulation
-Es wird ein auf der Klasse basierendes Objekt erstellt und das`run()`Methode wird aufgerufen.`step()`ist erhältlich als
+Objekt basierend auf der Klasse wird erstellt und das`run()`Methode wird aufgerufen.`step()`ist erhältlich als
 Alternative zum Single-Stepping, diese Methode wird hier jedoch nicht verwendet.
 
 Die Simulation betrifft nur den Userspace-Teil der RISC-V ISA.  Das heißt, sobald das Programm das verwendet`ecall`Anweisung kann die Simulation gestoppt werden.  Dies ist das erwartete Verhalten für die Programme in[Testsuite](https://github.com/riscv/riscv-tests.git).
@@ -41,7 +41,7 @@ Der`CPUState`Die Klasse verfügt über drei Methoden, die implementiert werden m
 der Simulation:
 
 -   `get_register(reg)`: Gibt den Wert eines Registers mit dem Namen zurück`reg`.  Beachten Sie, dass RISC-V-Ganzzahlregister mehrere haben
-    Namen.  Alle sollten unterstützt werden, aber das Framework verwendet`a0`,`a7`, Und`gp`.
+    Namen.  Alle sollten unterstützt werden, aber das Framework verwendet`a0`,`a7`, and `gp`.
 -   `is_ecall()`: Gibt zurück, ob die letzte ausgeführte Anweisung eine war`ecall`.  Simulation eines`ecall`Anweisung
     sollte die Simulation stoppen und die Implementierung sollte zu diesem Zeitpunkt feststellen können, ob`ecall`War
     die letzte auszuführende Anweisung.
@@ -51,7 +51,7 @@ der Simulation:
 ## Verwendung
 
 Die RISC-V ISA-Testsuite deckt alle grundlegenden Anweisungen auf ziemlich gründliche Weise ab.  Die Tests sind weiter
-gruppiert nach der Erweiterung der ISA, die sie eingeführt hat.  Die Grundtests sind in der`i`Erweiterung und sie
+gruppiert nach der Erweiterung der ISA, die sie eingeführt hat.  Die Grundtests finden Sie im`i`Erweiterung und sie
 sollten zunächst implementiert und getestet werden.
 
 |  Name | Beschreibung                                 |
@@ -95,8 +95,9 @@ Als nächstes ist es notwendig, die Grundlagen des RISC-V-Befehlssatzes zu kenne
 Band 2 kann vorerst ignoriert werden.
 
 Nach der Lektüre von Kapitel 1 ist es, wie oben erläutert, am besten, mit der Implementierung und dem Testen zu beginnen`i`Verlängerung
-wird in Kapitel 2 erklärt. Die 64-Bit-Variante wird in Kapitel 7 erklärt. Es könnte sinnvoll sein, das zu implementieren`i`Zuerst die Erweiterung für beide Größen, bevor Sie mit den anderen Erweiterungen fortfahren.  Der Grund dafür ist, dass dies eine ergibt
-Gelegenheit zu lernen, wie man die Implementierung für diese Breite vereinheitlicht.  Den Code einlesen`pysim_riscv.py`Du
+wird in Kapitel 2 erklärt. Die 64-Bit-Variante wird in Kapitel 7 erklärt. Es könnte sinnvoll sein, das zu implementieren`i`
+extension for both sizes first before moving on to the other extensions.  The reason is that this gives an
+opportunity to learn how to unify the implementation for these width.  Reading the code in `pysim_riscv.py`Du
 kann sehen, dass die`Simulation`Das Objekt hat einen Member namens`xlen`Dies ist der in der gesamten ISA gebräuchliche Name
 Handbuch zur Unterscheidung zwischen 32-Bit- und 64-Bit-Varianten.  Verwenden Sie diese Mitgliedsvariable anstelle einer fest codierten Variable
 Werte in Ihrem Code.
@@ -119,8 +120,8 @@ Zusätzlich kann der Stil mit überprüft werden
 pylint --rcfile pylint.conf run_riscv_test.py
 ```
 
-und ähnlich für die anderen Python-Dateien.  Der ausgewählte Stil ist voreingenommen und jeder sollte sich dazu frei fühlen
-Passen Sie es wie gewünscht an.
+and similarly for the other Python files.  The selected style is biased and everyone should feel free to
+adjust it as wanted.
 
 ## Was kommt als nächstes?
 
@@ -134,6 +135,6 @@ Dies ermöglicht es dann, den gesamten Schritt von höheren Programmiersprachen 
 CPU beim Ausführen der Anweisungen.  Dies kann dann dazu führen, dass über Optimierungen nachgedacht und diese umgesetzt werden
 sowohl den generierten Code als auch die CPU-Implementierung selbst.
 
-## In Case Of Bugs
+## Im Falle von Fehlern
 
 Dateifehler/Probleme auf[GitHub](https://github.com/drepper/riscv-from-scrath/issues).
