@@ -19,7 +19,7 @@ Gehen Sie zum Projekt[Seite des Repositorys](https://github.com/drepper/riscv-fr
 Taste.  Dann lokal in einer Shell in einem Verzeichnis ausführen, das für den Quellcode gedacht ist:
 
 ```bash
-git clone --recurse-submodules https://github.com/<your-username>/riscv-from-scratch.git
+git clone --recurse-submodules git@github.com:<your-username>/riscv-from-scratch.git
 ```
 
 Hier`<your-username>`ist Ihr GitHub-Benutzername.  Dadurch wird eine lokale Kopie des Repositorys erstellt und auch alles abgerufen
@@ -41,7 +41,7 @@ Der`CPUState`Die Klasse verfügt über drei Methoden, die implementiert werden m
 der Simulation:
 
 -   `get_register(reg)`: Gibt den Wert eines Registers mit dem Namen zurück`reg`.  Beachten Sie, dass RISC-V-Ganzzahlregister mehrere haben
-    Namen.  Alle sollten unterstützt werden, aber das Framework verwendet`a0`,`a7`, and `gp`.
+    Namen.  Alle sollten unterstützt werden, aber das Framework verwendet`a0`,`a7`, Und`gp`.
 -   `is_ecall()`: Gibt zurück, ob die letzte ausgeführte Anweisung eine war`ecall`.  Simulation eines`ecall`Anweisung
     sollte die Simulation stoppen und die Implementierung sollte zu diesem Zeitpunkt feststellen können, ob`ecall`War
     die letzte auszuführende Anweisung.
@@ -95,9 +95,8 @@ Als nächstes ist es notwendig, die Grundlagen des RISC-V-Befehlssatzes zu kenne
 Band 2 kann vorerst ignoriert werden.
 
 Nach der Lektüre von Kapitel 1 ist es, wie oben erläutert, am besten, mit der Implementierung und dem Testen zu beginnen`i`Verlängerung
-wird in Kapitel 2 erklärt. Die 64-Bit-Variante wird in Kapitel 7 erklärt. Es könnte sinnvoll sein, das zu implementieren`i`
-extension for both sizes first before moving on to the other extensions.  The reason is that this gives an
-opportunity to learn how to unify the implementation for these width.  Reading the code in `pysim_riscv.py`Du
+wird in Kapitel 2 erklärt. Die 64-Bit-Variante wird in Kapitel 7 erklärt. Es könnte sinnvoll sein, das zu implementieren`i`Zuerst die Erweiterung für beide Größen, bevor Sie mit den anderen Erweiterungen fortfahren.  Der Grund dafür ist, dass dies eine ergibt
+Gelegenheit zu lernen, wie man die Implementierung für diese Breite vereinheitlicht.  Den Code einlesen`pysim_riscv.py`Du
 kann sehen, dass die`Simulation`Das Objekt hat einen Member namens`xlen`Dies ist der in der gesamten ISA gebräuchliche Name
 Handbuch zur Unterscheidung zwischen 32-Bit- und 64-Bit-Varianten.  Verwenden Sie diese Mitgliedsvariable anstelle einer fest codierten Variable
 Werte in Ihrem Code.
@@ -120,8 +119,8 @@ Zusätzlich kann der Stil mit überprüft werden
 pylint --rcfile pylint.conf run_riscv_test.py
 ```
 
-and similarly for the other Python files.  The selected style is biased and everyone should feel free to
-adjust it as wanted.
+und ähnlich für die anderen Python-Dateien.  Der ausgewählte Stil ist voreingenommen und jeder sollte sich dazu frei fühlen
+Passen Sie es wie gewünscht an.
 
 ## Was kommt als nächstes?
 
